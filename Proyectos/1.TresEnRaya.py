@@ -12,9 +12,12 @@
 # de los jugadores, y adempas escoger los caracteres, por defeco sera la x y e l o
 # Y la tercera opción será jugar
 # Y la cuarta salir
+# Ademas los resultados se guardaran en un archivo de texto con fecha hora.
+from random import randint
 
 
 from glob import glob
+from xml.dom.minidom import DOMImplementation
 
 
 global nombreJugador1
@@ -25,6 +28,28 @@ global piezaJugador1
 piezaJugador1 = 'X'
 global piezaJugador2
 piezaJugador2 = 'O'
+
+def crearMatriz():
+    matriz = []
+    nFilas = 3
+    nColumnas = 3
+
+    for i in range(nFilas):
+        matriz.append(['-'] * nColumnas)              # Esto de aqui esta bien loco :0
+    dimensiones = (nFilas, nColumnas)
+    return matriz, dimensiones
+
+def mostrarMatriz(matriz, dimensiones):
+    filas, columnas = dimensiones
+    for i in range(filas):
+        for j in range(columnas):
+            print(matriz[i][j], end = '\t')
+        print('')
+
+def llenarMatriz(matriz, caracter):
+    fila = int(input('Fila: '))
+    columna = int(input('Columna: '))
+    matriz[fila-1][columna-1] = caracter
 
 
 def menu():
@@ -80,19 +105,32 @@ def cambiarPiezas():
 
 
 
-def jugar():
-    print('Jugando....')
-    print('Es turno del jugador',nombreJugador1)
-    print('Es turno del jugador 2',nombreJugador2)
-    print('Pieza 1',piezaJugador1)
-    print('Pieza 2',piezaJugador2)
+def jugar(tablero, dimensiones):
+
+
+    finalizado = False
+    turno = randint(1,2)
+    while finalizado == False:
+
+        if turno == 1:
+            print('Es turno de: ', nombreJugador1)
+            # llenar
+            llenarMatriz(tablero, piezaJugador1)
+            turno = 2
+
+        else:
+            print('Es turno de: ', nombreJugador2)
+            # llenar
+            llenarMatriz(tablero, piezaJugador2)
+            turno = 1
+
+        mostrarMatriz(tablero, dimensiones)
 
 def mostrarTablero():
     pass
 
 def main():
     terminarJuego = False
-
     while terminarJuego == False:
             
             
@@ -104,9 +142,12 @@ def main():
         elif opcionMenu == '2':
            cambiarPiezas()
         elif opcionMenu == '3':
-           jugar()
+           tablero,dimensiones = crearMatriz()
+           jugar(tablero, dimensiones)
         elif opcionMenu == '4':
            terminarJuego = True
+           print('\tGracias por jugar, te esperamos pronto')
+
         else:
            print('Por favor ingrese una opción válida')
         
