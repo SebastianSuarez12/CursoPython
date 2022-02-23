@@ -115,16 +115,47 @@ def jugar(tablero, dimensiones):
         if turno == 1:
             print('Es turno de: ', nombreJugador1)
             # llenar
+            piezaActual = piezaJugador1
+            jugadorActual = nombreJugador1
             llenarMatriz(tablero, piezaJugador1)
             turno = 2
 
         else:
             print('Es turno de: ', nombreJugador2)
             # llenar
+            piezaActual = piezaJugador2
+            jugadorActual = nombreJugador2
             llenarMatriz(tablero, piezaJugador2)
             turno = 1
 
+        # validar cuando se haga tres en raya 
+        # Horizontales
+        if tablero[0][0] == piezaActual and tablero[0][1] == piezaActual and tablero[0][2] == piezaActual:
+            finalizado = True
+        elif tablero[1][0] == piezaActual and tablero[1][2] == piezaActual and tablero[1][1] == piezaActual:
+            finalizado = True
+        elif tablero[2][0] == piezaActual and tablero[2][2] == piezaActual and tablero[2][1] == piezaActual:
+            finalizado = True
+        # Verticales
+        if tablero[0][0] == piezaActual and tablero[2][0] == piezaActual and tablero[1][0] == piezaActual:
+            finalizado = True
+        elif tablero[0][1] == piezaActual and tablero[2][1] == piezaActual and tablero[1][1] == piezaActual:
+            finalizado = True
+        elif tablero[0][2] == piezaActual and tablero[2][2] == piezaActual and tablero[1][2] == piezaActual:
+            finalizado = True
+
+        # Diagonal
+        if tablero[0][0] == piezaActual and tablero[2][2] == piezaActual and tablero[1][1] == piezaActual:
+            finalizado = True
+        elif tablero[2][0] == piezaActual and tablero[1][1] == piezaActual and tablero[0][2] == piezaActual:
+            finalizado = True
+
+
+        # validar cuando este lleno todos los espacios
+
         mostrarMatriz(tablero, dimensiones)
+    print('\t Tres en Raya')
+    print('\t El ganador es: ', jugadorActual)
 
 def mostrarTablero():
     pass
@@ -151,6 +182,6 @@ def main():
         else:
            print('Por favor ingrese una opción válida')
         
-        jugar()
+        
 
 main()
