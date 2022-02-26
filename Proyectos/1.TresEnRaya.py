@@ -17,6 +17,7 @@ from random import randint
 
 
 from glob import glob
+from turtle import window_width
 from xml.dom.minidom import DOMImplementation
 
 
@@ -153,7 +154,7 @@ def jugar(tablero, dimensiones):
 
         # validar cuando este lleno todos los espacios
 
-        mostrarMatriz(tablero, dimensiones)
+        mostrarMatriz(tablero, dimensiones) 
     print('\t Tres en Raya')
     print('\t El ganador es: ', jugadorActual)
 
