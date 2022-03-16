@@ -3,7 +3,7 @@ from nbformat import write
 # forma de abrir archivos
 # textual
 # binario
-archivo = 'Scrpting/PDF/pdfsBases/marcaAgua.pdf'
+archivo = 'Scrpting/PDF/pdfsBases/pdfUnido.pdf'
 
 with open(archivo, 'rb') as miArchivo:
     print(miArchivo)
@@ -27,6 +27,9 @@ with open(archivo, 'rb') as miArchivo:
     pagina = archivoPDF.getPage(0)
     print(pagina)
     print(type(pagina))
+
+    # Rotar una página
+    pagina.rotateCounterClockwise(180)
 
     # Escribir pdf
 
