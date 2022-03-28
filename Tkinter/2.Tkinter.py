@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import GROOVE, SUNKEN
+from tkinter import GROOVE, SUNKEN, ttk
 from turtle import color
 
 colorVerde = '#C7FF89'
@@ -24,8 +24,6 @@ class Ventana:
     def saludar(self,texto):
         print('Dices', texto)
 
-    
-    
     def dibujar(self):
         titulo = tk.Label(self.root,text='Formulario', bg=colorVerde, font=fuenteTitulos)    
         titulo.place(x=220,y=15)
@@ -42,6 +40,9 @@ class Ventana:
 
         lblEdad = tk.Label(self.root, text='Edad:', bg=colorVerde, font=fuenteGeneral)
         lblEdad.place(x=20, y=190)
+        
+        lblSexo = tk.Label(self.root, text='Sexo:', bg=colorVerde, font=fuenteGeneral)
+        lblSexo.place(x=20, y=230)
 
         # Input
         inputNombre = tk.Entry(self.root, width=20)
@@ -53,12 +54,14 @@ class Ventana:
         inputEdad = tk.Entry(self.root)
         inputEdad.place(x=100,y=190)
 
+        listaSexos = ['M','F']
         # Combobox
-        
+        cmbSexo = tk.ttk.Combobox(self.root, values=listaSexos, width=9)
+        cmbSexo.place(x=100, y=230)
 
 
         def guardarInformacion2():
-             print(f'Información {inputNombre.get()} {inputApellido.get()} {inputEdad.get()}')
+             print(f'Información {inputNombre.get()} {inputApellido.get()} {inputEdad.get()} {inputEdad.get()}')
 
 
         # Boton
