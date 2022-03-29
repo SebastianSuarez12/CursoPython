@@ -1,3 +1,4 @@
+from lib2to3.pytree import Base
 import psycopg2
 
 class BaseDatos:
@@ -14,7 +15,7 @@ class BaseDatos:
             self.conexion = psycopg2.connect(host='localhost', 
                                             database=str(self.baseDatos),
                                             user='postgres', 
-                                            password='anderson', 
+                                            password='root', 
                                             port=5432)
             print('La conexión se ha realizado')
             self.cursor = self.conexion.cursor()
@@ -22,11 +23,19 @@ class BaseDatos:
         except:
             print('Error no se pudo conectar a esa instancia de la base de datos')
 
-    def insertarUsuario(self,nombre, apellido, edad, sexo):
-        valores = (nombre, apellido,edad, sexo)
-        sentenciaInsert = '''INSERT INTO public."Usuarios"(
-	        nombre, apellido, edad, sexo)
-	        VALUES (%s, %s, %s, %s);
+    def insertarUsuario(self,nombre, apellido, edad, sexo, correo, formacion):
+        idU=nombre
+        valores = (idU,nombre, apellido,edad, sexo, correo, formacion)
+        sentenciaInsert = '''INSERT INTO public."Usiarios"(
+            id, nombre, apellido, edad, sexo, correo, formacion)
+	        VALUES (%s, %s, %s, %s, %s, %s, %s);
             '''
         self.cursor.execute(sentenciaInsert,valores)
         self.conexion.commit()
+
+    def obtenerDatosUsuarios(self):
+        self.cursor.execute('SELECT * FROM public."Usiarios";')
+        datosUsuarios = self.cursor.fetchall();
+        #for data in datosUsuarios:
+            #print(data)
+        return datosUsuarios

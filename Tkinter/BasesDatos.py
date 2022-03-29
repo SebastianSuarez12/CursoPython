@@ -5,21 +5,20 @@ conexion = psycopg2.connect(host='localhost', database='postgres', user='postgre
 # 2. Creamos el cursos
 cursor = conexion.cursor()
 # Ejecutamos
-cursor.execute('SELECT * FROM public."postgres";')
+cursor.execute('SELECT * FROM public."Usiarios";')
 # Visualizar los resultados
 for data in cursor.fetchall():
     print(data)
 
 # Insert (sentencia insert) (valores)
 
-sentenciaInsert = '''INSERT INTO public."postgres"(
-	nombre, apellido, edad, sexo)
-	VALUES (%s, %s, %s, %s);
+sentenciaInsert = '''INSERT INTO public."Usiarios"(
+	nombre, apellido, edad, sexo, correo, formacion)
+	VALUES (%s, %s, %s, %s, %s, %s, %s);
     '''
-valores = ('Anderson2','Cardenas',22,'M')
-valores2 = ('Anderson3','Cardenas',22,'M')
+valores = ('22','Anderson2','Cardenas',22,'M', 'elpepe@gmail.com', 'Superior')
+
 cursor.execute(sentenciaInsert,valores)
-cursor.execute(sentenciaInsert,valores2)
 conexion.commit()
 registrosInsertados = cursor.rowcount
 print('Se insertaron ', registrosInsertados)
