@@ -13,6 +13,7 @@ colorBlanco = '#FFFFFF'
 fuenteTitulos = ('Courie',14,'bold')
 fuenteGeneral = ('Courie',11,'normal')
 
+
 class Ventana:
     def __init__(self) -> None:
         self.conexionDatos = BaseDatos('postgres')
@@ -177,3 +178,5 @@ class Ventana:
         self.root.mainloop()
 
 ventana = Ventana()
+
+
